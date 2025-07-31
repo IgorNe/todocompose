@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.ads.mobile.sdk)
     kapt(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)
