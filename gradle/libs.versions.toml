@@ -1,6 +1,6 @@
 [versions]
 agp = "8.11.1"
-kotlin = "2.0.21"
+kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -14,6 +14,12 @@ roomCompiler = "2.7.2"
 hiltNavigationCompose = "1.2.0"
 composeMaterial3 = "1.5.0-beta06"
 adsMobileSdk = "0.18.0-beta01"
+postgrestKt = "3.2.0-ksp-b1"
+realtimeKt = "3.2.0-ksp-b1"
+storageKt = "3.2.0-ksp-b1"
+ktorClientOkhttp = "3.2.0"
+kotlinxSerializationJson = "1.9.0"
+serialver = "2.2.20-Beta2"
 
 
 [libraries]
@@ -39,9 +45,15 @@ hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testi
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-compose-material3 = { group = "androidx.wear.compose", name = "compose-material3", version.ref = "composeMaterial3" }
 ads-mobile-sdk = { group = "com.google.android.libraries.ads.mobile.sdk", name = "ads-mobile-sdk", version.ref = "adsMobileSdk" }
+postgrest-kt = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt", version.ref = "postgrestKt" }
+realtime-kt = { group = "io.github.jan-tennert.supabase", name = "realtime-kt", version.ref = "realtimeKt" }
+storage-kt = { group = "io.github.jan-tennert.supabase", name = "storage-kt", version.ref = "storageKt" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version = "3.2.3" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+serializator = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialver" }

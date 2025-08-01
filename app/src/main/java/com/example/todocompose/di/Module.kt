@@ -3,6 +3,7 @@ package com.example.todocompose.di
 import android.app.Application
 import androidx.room.Room
 import com.example.todocompose.db.MainDb
+import com.example.todocompose.repository.ChatRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +26,9 @@ object Module {
             //.createFromAsset("db/notes.db")
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideChatRepository(): ChatRepository = ChatRepository()
 }
+

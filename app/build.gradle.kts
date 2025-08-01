@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.serializator )
     kotlin("kapt")
 }
 
@@ -56,10 +57,15 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.compose.material3)
     implementation(libs.ads.mobile.sdk)
+    implementation(libs.postgrest.kt)
+    implementation(libs.realtime.kt)
+    implementation(libs.storage.kt)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.kotlinx.serialization.json)
     kapt(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)  // Обработчик аннотаций
+    kapt(libs.hilt.compiler)
 
 
     androidTestImplementation(libs.hilt.android.testing)

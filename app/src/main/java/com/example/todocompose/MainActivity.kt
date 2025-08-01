@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.todocompose.ui.BluetoothKeyboardScreen
 import com.example.todocompose.ui.MainScreen
+import com.example.todocompose.ui.theme.ChatScreen
 import com.example.todocompose.ui.theme.TodocomposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +29,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TodocomposeTheme {
-                BluetoothKeyboardScreen()
+                ChatScreen()
+                //BluetoothKeyboardScreen()
                 //MainScreen()
                 /*Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
