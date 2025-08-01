@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -29,10 +30,10 @@ import io.ktor.utils.io.InternalAPI
 
 
 @Composable
-fun ChatScreen(
+fun ChatScr(
     viewModel: ChatViewModel = viewModel()
 ) {
-    // Правильное чтение состояний из ViewModel
+
     val messageText = viewModel.messageText
     val messages = viewModel.messages
 
@@ -46,7 +47,8 @@ fun ChatScreen(
             items(messages) { message ->
                 Text(
                     text = message.text,
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(8.dp),
+                    color = Color.Black
                 )
                 Divider()
             }
@@ -68,6 +70,93 @@ fun ChatScreen(
             ) {
                 Text("Отправить")
             }
+        }
+    }
+}
+
+@Composable
+fun ChatScreen(viewModel: ChatViewModel = viewModel()) {
+    val messageText = viewModel.messageText
+    val messages = viewModel.messages
+    val isLoading = viewModel.isLoading
+
+    LaunchedEffect(Unit) {
+        viewModel.loadMessages()
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Bottom
+    ) {
+        Box(modifier = Modifier.weight(1f)) {
+            when {
+                isLoading -> {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                messages.isEmpty() -> {
+                    Text(
+                        "Нет сообщений",
+                        modifier = Modifier.align(Alignment.Center),
+                        color = Color.Gray
+                    )
+                }
+                else -> {
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(messages) { message ->
+                            MessageItem(message)
+                            Divider()
+                        }
+                    }
+                }
+            }
+        }
+
+        MessageInput(
+            messageText = messageText,
+            onMessageChange = viewModel::updateMessageText,
+            onSend = { viewModel.sendMessage() }
+        )
+    }
+}
+
+@Composable
+private fun MessageItem(message: ChatMessage) {
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text(text = message.userId, style = MaterialTheme.typography.labelSmall)
+        Text(text = message.text, style = MaterialTheme.typography.bodyLarge)
+        message.createdAt?.let {
+            Text(text = it, style = MaterialTheme.typography.labelSmall)
+        }
+    }
+}
+
+@Composable
+private fun MessageInput(
+    messageText: String,
+    onMessageChange: (String) -> Unit,
+    onSend: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextField(
+            value = messageText,
+            onValueChange = onMessageChange,
+            modifier = Modifier.weight(1f),
+            placeholder = { Text("Введите сообщение...") }
+        )
+
+        Button(
+            onClick = onSend,
+            enabled = messageText.isNotBlank(),
+            modifier = Modifier.padding(start = 8.dp)
+        ) {
+            Text("Отправить")
         }
     }
 }
